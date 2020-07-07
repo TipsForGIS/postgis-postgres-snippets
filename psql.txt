@@ -1,0 +1,40 @@
+
+-- 1. Connects to psql through command line
+psql --host=xyz.amazonaws.com --username=user_name --dbname=database_name --port=5432
+
+------------------------------------------------------------------------
+-- 2. Connects to psql and run a sql command at the same time
+psql --host=xyz.amazonaws.com --username=user_name --dbname=database_name --port=5432 --command="SELECT * FROM schema.table;"
+
+------------------------------------------------------------------------
+-- 3. Copies from database to local csv.
+-- The HEADER parameter is for adding the column headers to the CSV file
+\copy (SELECT * FROM schema_name.table_name order by col_name limit 100) TO './output_name.csv' CSV HEADER;
+
+------------------------------------------------------------------------
+-- 4. Copies from a local csv to an already created table in the database. 
+-- The HEADER parameter is for ignoring the insertion of the csv header into the table
+\copy schema_name.table_name FROM './file_name.csv' DELIMITER ',' CSV HEADER;
+
+------------------------------------------------------------------------
+-- 5. Lists the tables
+\dt
+-- list tables for specific schema
+\dt schema_name.*
+-- this also works for \di and \du
+
+------------------------------------------------------------------------
+-- 6. time pgsql
+\timing
+
+------------------------------------------------------------------------
+-- 7. Lists the indeces
+\di
+
+------------------------------------------------------------------------
+-- 8. Lists the users
+\du
+
+------------------------------------------------------------------------
+-- 9. quits pgsql
+\q
